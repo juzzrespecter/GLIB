@@ -1,0 +1,21 @@
+# Notas sobre la libreria
+
+## Estructura de la libreria
+- Encapsulacion en una clase, la generacion de una clase implica un nuevo
+contexto o ventana.
+- Llamamos **escena** al conjunto de configuraciones que se renderizan en una ventana.
+- La escena puede ser **dinamica** o **estatica**
+- Una escena **dinamica** trabaja con opengl para la insercion, eliminado y movimiento de los objetos desde OpenGL
+- Una escena **estatica** es el renderizado con el algoritmo de RayTracing de un archivo de configuracion.
+- Solo es posible tener una configuracion de escena dinamica, es posible tener mas de una configuracion de escena estatica (una para cada configuracion de camara)
+
+
+### Cambio de tipos de escena
+Hook en un boton de la Gui.
+
+### Investigar
+- Distintas clases para el renderizado dinamico y estatico
+
+### TODO
+- Abstraer todos los objetos nativos de OpenGL
+- Clase logger
