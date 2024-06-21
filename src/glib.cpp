@@ -55,23 +55,23 @@ void GLib::__generate_texture_scene(void)
 
 void    GLib::create_context(unsigned int width, unsigned int height)
 {
-    GLenum glew_init_ret;
+    this->__win = glfwCreateWindow(width, height, "Test title", NULL, NULL);
 
-    this->__win = glfwCreateWindow(width, height, NULL, NULL, NULL);
-
+    glfwMakeContextCurrent(this->__win);
     if (!this->__win)
     {
         throw glib_runtime_exception("window initialization error");
     }
+    // glViewport ??
+
         // hints
     //glfwWindowHint(int hint, int value);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glew_init_ret = glewInit();
-    if (glew_init_ret != GLEW_OK)
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        std::cerr << "[GLEW] [ERROR] could not initializate GLEW" << std::endl; // temporal
+        std::cerr << "[GLAD] [ERROR] could not initializate GLEW" << std::endl; // temporal
         throw glib_runtime_exception("GLEW initialization error");
     }
     // log opengl version

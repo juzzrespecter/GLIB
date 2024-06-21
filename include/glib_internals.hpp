@@ -1,7 +1,8 @@
 #ifndef __GLIB_INTERNALS_HPP
 # define __GLIB_INTERNALS_HPP
 
-# include <GL/glew.h>
+//# include <GL/glew.h>
+# include <glad/glad.h>
 # include <GLFW/glfw3.h>
 
 # include <iostream>
