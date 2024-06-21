@@ -24,6 +24,7 @@ NAME    = libg.a
 
 CXX =	    clang++
 CXXFLAGS = -Wall -Werror -Wextra
+
 CPPFLAGS = -MMD
 INC      = -I $(INC_DIR)
 LDFLAGS  = ${shell pkg-config --libs glfw3} -GL

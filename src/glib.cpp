@@ -44,9 +44,9 @@ void GLib::__generate_texture_scene(void)
     };
 
     GLuint  buffer_id;
-    glGenBuffers(1, &buffer_id);
-    glBindBuffer(GL_ARRAY_BUFFER, buffer_id);
-    glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), canvas_vertices, GL_STATIC_DRAW);
+    GL_wrap(glGenBuffers(1, &buffer_id));
+    GL_wrap(glBindBuffer(GL_ARRAY_BUFFER, buffer_id));
+    GL_wrap(glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), canvas_vertices, GL_STATIC_DRAW));
 
     // creamos los buffers para la textura y el lienzo
 

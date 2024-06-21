@@ -5,6 +5,7 @@
 
 bool GL_check_error(const char *, const char *, int)
 {
+    std::cout << "blerg";
     while (GLenum err = glGetError() != GL_NO_ERROR)
     {
         return false;
