@@ -38,16 +38,25 @@ void GLib::__generate_texture_scene(void)
 {
 //    GLuint  VAO_texture;
 
-    static const std::vector<float> canvas_vertices = {
+    //static const std::vector<float> canvas_vertices = {
+    //    -0.5f, -0.5f,
+    //    0.5f, -0.5f,
+    //    0.0f, 0.5f
+    //};
+
+    static const float canvas_vertices[] = {
         -0.5f, -0.5f,
-        0.5f, -0.5f,
-        0.0f, 0.5f
+        0.0f, 0.5f,
+        0.5f, -0.5f
     };
 
     GLuint  buffer_id;
     GL_wrap(glGenBuffers(1, &buffer_id));
     GL_wrap(glBindBuffer(GL_ARRAY_BUFFER, buffer_id));
-    GL_wrap(glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), canvas_vertices.data(), GL_STATIC_DRAW));
+    GL_wrap(glBufferData(GL_ARRAY_BUFFER, 
+        6 * sizeof(float), 
+        canvas_vertices,
+        GL_STATIC_DRAW));
 
 //    Canvas_scene.Init_canvas(canvas_vertices, 6 * sizeof(float));
 
@@ -61,36 +70,37 @@ void GLib::__generate_texture_scene(void)
         "\n"
         "void main()\n"
         "{\n"
-        "   gl_Position = position\n"
-        "}\n"
+        "   gl_Position = position;\n"
+        "}\n";
 
     std::string fragment_shader = 
         "#version 330 core\n"
         "\n"
-        "layout(location = 0) in vec4 position;\n"
+        "layout(location = 0) out vec4 color;\n"
         "\n"
         "void main()\n"
         "{\n"
-        "   gl_Position = position\n"
-        "}\n"
+        "   color = vec4(1.0, 0.0, 0.0, 1.0);\n"
+        "}\n";
 
-    GLuint shader = __create_shader();
-    std::cout << "[INFO] init canvas\n";
+    GLuint shader = __create_shader(vertex_shader, fragment_shader);
+    GL_wrap(glUseProgram(shader));
+    std::cout << "[INFO] init canvas | " << shader << std::endl;
+
     // creamos los buffers para la textura y el lienzo
 
 //    GL_wrap(glGenVertexArrays(1, &VAO_texture));
 }
 
-void    GLib::create_context(unsigned int width, unsigned int height)
+void    GLib::create_context(unsigned int w, unsigned int h)
 {
-    this->__win = glfwCreateWindow(width, height, "Test title", NULL, NULL);
+    __win = glfwCreateWindow(w, h, "Test title", NULL, NULL);
 
-    glfwMakeContextCurrent(this->__win);
-    if (!this->__win)
+    if (!__win)
     {
         throw glib_runtime_exception("window initialization error");
     }
-    // glViewport ??
+    glfwMakeContextCurrent(__win);
 
         // hints
     //glfwWindowHint(int hint, int value);
@@ -103,6 +113,8 @@ void    GLib::create_context(unsigned int width, unsigned int height)
         throw glib_runtime_exception("GLEW initialization error");
     }
     // log opengl version
+        // glViewport ??
+    GL_wrap(glViewport(0, 0, w, h)); //temp
     __generate_texture_scene();
 }
 
@@ -111,13 +123,13 @@ void    GLib::render(void)
     __render_main_loop();
 }
 
-void    Glib::__compile_shader(GLuint type, const std::string& code)
+GLuint    GLib::__compile_shader(GLuint type, const std::string& code)
 {
     GLuint id;
     
     GL_wrap(id = glCreateShader(type));
     const char *src = code.c_str();
-    GL_wrap(glShaderSource(&id, src));
+    GL_wrap(glShaderSource(id, 1, &src, nullptr));
     GL_wrap(glCompileShader(id));
 
     int result;
@@ -138,9 +150,10 @@ void    Glib::__compile_shader(GLuint type, const std::string& code)
 
 GLuint    GLib::__create_shader(const std::string& vertex_shader, const std::string& fragment_shader)
 {
-    GL_wrap(GLuint program = glCreateProgram());
-    GLuint vshader_id = __compile_shader(GL_VERTEX_SHADER);
-    GLuint fshader_id = __compile_shader(GL_FRAGMENT_SHADER);
+    GLuint program; 
+    GL_wrap(program = glCreateProgram());
+    GLuint vshader_id = __compile_shader(GL_VERTEX_SHADER, vertex_shader);
+    GLuint fshader_id = __compile_shader(GL_FRAGMENT_SHADER, fragment_shader);
 
     GL_wrap(glAttachShader(program, vshader_id));
     GL_wrap(glAttachShader(program, fshader_id));
@@ -150,6 +163,7 @@ GLuint    GLib::__create_shader(const std::string& vertex_shader, const std::str
     GL_wrap(glDeleteShader(vshader_id));
     GL_wrap(glDeleteShader(fshader_id));
 
+    std::cout << "[SHADER] " << program << " | " << vshader_id << " | " << fshader_id << std::endl;
     return program;
     //std:istream vshader_file, fshader_file;
     //vshader_file.open("shaders/canvas_vertex.glsl");

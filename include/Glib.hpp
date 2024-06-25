@@ -12,6 +12,7 @@ class GLib
             // array de clases que contengan elementos generados dinamicamente
         void    __generate_texture_scene(void);
 
+        GLuint  __compile_shader(GLuint, const std::string&);
         GLuint  __create_shader(const std::string&, const std::string&);
 
 
