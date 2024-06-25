@@ -1,7 +1,6 @@
 #ifndef __GLIB_INTERNALS_HPP
 # define __GLIB_INTERNALS_HPP
 
-//# include <GL/glew.h>
 # include <glad/glad.h>
 # include <GLFW/glfw3.h>
 
@@ -10,8 +9,8 @@
 # include "utils.hpp"
 
 # ifdef DEBUG
-#  define ASSERT(x) if(!(x)) __builtin_debugtrap
-#  define GL_wrap(x) GL_check_error();\
+#  define ASSERT(x) if(!(x)) __builtin_debugtrap()
+#  define GL_wrap(x) GL_clear_error();\
      x;\
      ASSERT(GL_check_error(#x, __FILE__, __LINE__))
 # else

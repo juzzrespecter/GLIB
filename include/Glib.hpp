@@ -7,12 +7,15 @@ class GLib
 {
     private:
         GLFWwindow  *__win;
-        Canvas      __canvas_scene;
+        Canvas      Canvas_scene;
 
             // array de clases que contengan elementos generados dinamicamente
-        void __generate_texture_scene(void);
+        void    __generate_texture_scene(void);
 
-        void __render_main_loop(void);
+        GLuint  __create_shader(const std::string&, const std::string&);
+
+
+        void    __render_main_loop(void);
 //            void __switch_to_dynamic_config()
 
     public:

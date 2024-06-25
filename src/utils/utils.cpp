@@ -3,11 +3,11 @@
 
 // debug options
 
-bool GL_check_error(const char *, const char *, int)
+bool GL_check_error(const char *fn, const char *file, int line)
 {
-    std::cout << "blerg";
     while (GLenum err = glGetError() != GL_NO_ERROR)
     {
+        std::cerr << "[GL] [ERROR] " << fn << " | " << file << " | " << line << std::endl;
         return false;
     }
     return true;
@@ -15,7 +15,7 @@ bool GL_check_error(const char *, const char *, int)
 
 void GL_clear_error(void)
 {
-    while (glGetError() == GL_NO_ERROR);
+    while (glGetError() != GL_NO_ERROR);
 }
 
 // exception classes

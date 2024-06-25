@@ -1,7 +1,7 @@
 # ======= source =======
 
 SRC = utils.cpp \
-		glib.cpp \
+		Glib.cpp \
 		Canvas.cpp \
 		render_core.cpp
 CSRC = glad.c
@@ -20,10 +20,15 @@ DEPS 	= $(OBJ:%.o=%.d)
 
 NAME    = libg.a
 
+TEST	= test
+
 # ======= Compilation flags =======
 
 CXX =	    clang++
 CXXFLAGS = -Wall -Werror -Wextra
+ifdef DEBUG
+	CXXFLAGS += -DDEBUG
+endif
 
 CPPFLAGS = -MMD
 INC      = -I $(INC_DIR)
@@ -48,19 +53,16 @@ $(OBJ_DIR)/%.o:		%.c
 $(OBJ_DIR):
 	mkdir -vp $(OBJ_DIR)
 
-test:		$(NAME)
-	$(CXX) $(CXXFLAGS) test.cpp -lg -L. $(LDFLAGS) $(INC)
+$(TEST):		$(NAME)
+	$(CXX) $(CXXFLAGS) test.cpp -o $@ -lg -L. $(LDFLAGS) $(INC)
 
 clean:
 	$(RM) $(OBJ_DIR)
-	make clean -C $(GLEW_COMP_TARGET)
 
 fclean:		clean
 	$(RM) $(NAME)
+	$(RM) $(TEST)
 
 re: fclean all
-
-debug:
-	echo $(SRC)
 
 -include $(DEPS)
