@@ -109,8 +109,8 @@ void    GLib::create_context(unsigned int w, unsigned int h)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
-        std::cerr << "[GLAD] [ERROR] could not initializate GLEW" << std::endl; // temporal
-        throw glib_runtime_exception("GLEW initialization error");
+        std::cerr << "[GLAD] [ERROR] could not initializate OpenGL" << std::endl; // temporal
+        throw glib_runtime_exception("GLAD initialization error");
     }
     // log opengl version
         // glViewport ??

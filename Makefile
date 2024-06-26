@@ -3,11 +3,13 @@
 SRC = utils.cpp \
 		Glib.cpp \
 		Canvas.cpp \
-		render_core.cpp
+		render_core.cpp \
+		Texture.cpp
 CSRC = glad.c
 
 vpath	%.cpp src
 vpath	%.cpp src/utils
+vpath	%.cpp src/base
 vpath	%.c	  src
 
 OBJ_DIR	= obj

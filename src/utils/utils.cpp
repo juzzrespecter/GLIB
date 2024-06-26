@@ -1,5 +1,5 @@
-#include "../../include/glib_internals.hpp"
-#include "../../include/utils.hpp"
+#include <glib_internals.hpp>
+#include <utils.hpp>
 
 // debug options
 
