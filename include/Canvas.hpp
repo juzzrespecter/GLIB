@@ -4,6 +4,8 @@
 # include <glib_internals.hpp>
 # include <vector>
 
+// Canvas se compone de una textura, un shaderprogram, un vertexbuffer y un indexbuffer
+
 class Canvas // wes un vertex buffer, o contiene un vertex buffer ??
 {
     private:

@@ -14,6 +14,8 @@ class IndexBuffer
         IndexBuffer(const IndexBuffer&);
         ~IndexBuffer();
 
+        GLuint GetId() const;
+        
 };
 
 # endif //__INDEX_BUFFER_HPP

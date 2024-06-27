@@ -3,17 +3,17 @@
 Texture::Texture(unsigned int w, unsigned int h, unsigned int bpp)
     : buffer(w * h * bpp), width(w), height(h), bpp(bpp)
 {
-     glGenTextures(1, texture_id);
+     glGenTextures(1, &texture_id);
 }
 
 Texture::Texture(const Texture& o): width(o.width), height(o.height), bpp(o.bpp)
 {
-    buffer(o.buffer.begin(), o.buffer.end());
+    buffer.assign(o.buffer.begin(), o.buffer.end());
 }
 
 Texture::~Texture()
 {
-    glDeleteTextures(texture_id);
+    glDeleteTextures(1, &texture_id); // TODO
 }
 
 void    Texture::Bind(void) const
@@ -28,9 +28,11 @@ void    Texture::Release(void) const
 
 void    Texture::SetBuffer(const char* buffer_array)
 {
+
     std::string buffer_string(buffer_array);
 
-    buffer(buffer_string);
+    buffer.assign(buffer_string.begin(),
+                  buffer_string.end());
 }
 
 unsigned int    Texture::GetMaxSize(void) const {

@@ -1,6 +1,6 @@
 #include <Glib.hpp>
 
-void GLib::__render_main_loop()
+void GLib::_render_main_loop()
 {
     while (!glfwWindowShouldClose(this->__win))
     {

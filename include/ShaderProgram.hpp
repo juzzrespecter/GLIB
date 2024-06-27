@@ -8,14 +8,15 @@ class ShaderProgram
         GLuint program_id;
         GLuint vertex_id, fragment_id;
 
-        const std::string& vertex_path;
-        const std::string& fragment_path;
+        const std::string vertex_path;
+        const std::string fragment_path;
 
         std::string     vertex_src;
         std::string     fragment_src;
 
-        void    __read_shader_from_file(void);
-        GLuint  __compile_shader(const std::string&, GLenum);
+        std::string _read_shader_from_file(const std::string&);
+        GLuint   _compile_shader(const std::string&, GLenum);
+
     public:
         ShaderProgram();
         ShaderProgram(const std::string&, const std::string&);

@@ -4,7 +4,7 @@
 #include <stdexcept> // tmp
 #include <string>
 
-GLuint    ShaderProgram::__compile_shader(const std::string& src, GLenum type)
+GLuint    ShaderProgram::_compile_shader(const std::string& src, GLenum type)
 {
     GLuint  shader_id;
     const char *_src = src.c_str();
@@ -30,7 +30,7 @@ GLuint    ShaderProgram::__compile_shader(const std::string& src, GLenum type)
     return (shader_id);
 }
 
-char *    ShaderProgram::__read_shader_from_file(const std::string& path)
+std::string    ShaderProgram::_read_shader_from_file(const std::string& path)
 {
     std::ifstream   shader_file(path.c_str());
 
@@ -39,23 +39,23 @@ char *    ShaderProgram::__read_shader_from_file(const std::string& path)
         throw std::runtime_error("bad"); // TODO: logger, refactor custom exceptions
     }
     std::ifstream::pos_type len_shader = shader_file.tellg();
-    shader_file.seek(0);
+    shader_file.seekg(0);
     std::vector<char> buffer(len_shader);
     shader_file.read(buffer.data(), len_shader);
 
-    return (std::string(buffer.data()), len_shader);
+    return (std::string(buffer.data(), len_shader));
 }
 
 ShaderProgram::ShaderProgram()
     : vertex_path("./shaders/canvas_vertex.glsl"),
-      shader_path("./shaders/canvas_fragment.glsl")
+      fragment_path("./shaders/canvas_fragment.glsl")
 {
-    GL_wrap(program = glCreateProgram());
-    vertex_src = __read_shader_from_file(vertex_path);
-    fragment_src = __read_shader_from_file(fragment_path);
+    GL_wrap(program_id = glCreateProgram());
+    vertex_src = _read_shader_from_file(vertex_path);
+    fragment_src = _read_shader_from_file(fragment_path);
 
-    vertex_id = __compile_shader(vertex_src, GL_VERTEX_SHADER);
-    fragment_id = __compile_shader(vertex_src, GL_FRAGMENT_SHADER);
+    vertex_id = _compile_shader(vertex_src, GL_VERTEX_SHADER);
+    fragment_id = _compile_shader(vertex_src, GL_FRAGMENT_SHADER);
 
     GL_wrap(glAttachShader(program_id, vertex_id));
     GL_wrap(glAttachShader(program_id, fragment_id));
@@ -70,6 +70,7 @@ ShaderProgram::ShaderProgram(const std::string& vpath, const std::string& fpath)
 }
 
 ShaderProgram::ShaderProgram(const ShaderProgram& o)
+    : vertex_path(o.vertex_path), fragment_path(o.fragment_path)
 {
 
 }
@@ -84,7 +85,7 @@ ShaderProgram::~ShaderProgram()
 
 GLuint  ShaderProgram::GetId(void) const
 {   
-    return (_program_id);
+    return (program_id);
 }
 
 void    ShaderProgram::Bind(void) const

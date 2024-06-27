@@ -22,9 +22,11 @@ static char *generate_espana(int w, int h)
 
 int main()
 {
-
+    char    *buffer;
     GLib test = GLib();
 
     test.create_context(600, 600);
+    buffer = generate_espana(600, 600);
+    (void) buffer;
     test.render();
 }
