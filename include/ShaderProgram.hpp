@@ -1,12 +1,12 @@
 #ifndef __SHADER_PROGRAM_HPP
 # define __SHADER_PROGRAM_HPP
 # include <glib_internals.hpp>
-#include <string>
 
 class ShaderProgram
 {
     private:
         GLuint program_id;
+        GLuint vertex_id, fragment_id;
 
         const std::string& vertex_path;
         const std::string& fragment_path;
@@ -15,6 +15,7 @@ class ShaderProgram
         std::string     fragment_src;
 
         void    __read_shader_from_file(void);
+        GLuint  __compile_shader(const std::string&, GLenum);
     public:
         ShaderProgram();
         ShaderProgram(const std::string&, const std::string&);

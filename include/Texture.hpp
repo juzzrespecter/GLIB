@@ -9,7 +9,7 @@ class Texture
 {
     private:
         GLuint              texture_id;
-        std::vector<char>   *buffer;
+        std::vector<char>   buffer;
 
         const unsigned int width, height, bpp;
 
@@ -25,6 +25,8 @@ class Texture
 
         void    Bind(void) const;
         void    Release(void) const;
+
+        void    SetBuffer(const char*);
 
         unsigned int    GetMaxSize(void) const;
         unsigned int    GetWidth(void) const;
