@@ -25,37 +25,40 @@ GLuint    ShaderProgram::_compile_shader(const std::string& src, GLenum type)
         glGetShaderInfoLog(shader_id, len_msg, &len_msg, msg);
         std::cerr << "[OPENGL] [SHADER [ERROR] " << msg << std::endl; // TODO refactor to log
         delete [] msg;
-        throw std::runtime_error("bad"); // TODO refactor exc
+        throw std::runtime_error("Shader compiler exception"); // TODO refactor exc
     }
     return (shader_id);
 }
 
 std::string    ShaderProgram::_read_shader_from_file(const std::string& path)
 {
-    std::ifstream   shader_file(path.c_str());
+    std::ifstream   shader_file(path.c_str(), std::ios::ate);
 
     if (!shader_file.is_open())
     {
-        throw std::runtime_error("bad"); // TODO: logger, refactor custom exceptions
+        throw std::runtime_error("Shader file open extension"); // TODO: logger, refactor custom exceptions
     }
     std::ifstream::pos_type len_shader = shader_file.tellg();
     shader_file.seekg(0);
     std::vector<char> buffer(len_shader);
     shader_file.read(buffer.data(), len_shader);
 
+    std::cerr << "buffer size: " << len_shader << std::endl;
+    std::cerr << "shader path: " << path.c_str() << std::endl;
+    std::cerr << "( " << buffer.data() << " )" << std::endl;
     return (std::string(buffer.data(), len_shader));
 }
 
 ShaderProgram::ShaderProgram()
-    : vertex_path("./shaders/canvas_vertex.glsl"),
-      fragment_path("./shaders/canvas_fragment.glsl")
+    : vertex_path("./src/shaders/canvas_vertex.glsl"),
+      fragment_path("./src/shaders/canvas_fragment.glsl")
 {
     GL_wrap(program_id = glCreateProgram());
     vertex_src = _read_shader_from_file(vertex_path);
     fragment_src = _read_shader_from_file(fragment_path);
 
     vertex_id = _compile_shader(vertex_src, GL_VERTEX_SHADER);
-    fragment_id = _compile_shader(vertex_src, GL_FRAGMENT_SHADER);
+    fragment_id = _compile_shader(fragment_src, GL_FRAGMENT_SHADER);
 
     GL_wrap(glAttachShader(program_id, vertex_id));
     GL_wrap(glAttachShader(program_id, fragment_id));
