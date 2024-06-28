@@ -2,6 +2,8 @@
 # define __GLIB_HPP
 # include <glib_internals.hpp>
 # include <Canvas.hpp>
+# include <VertexBuffer.hpp>
+# include <IndexBuffer.hpp>
 
 class GLib
 {
@@ -11,7 +13,6 @@ class GLib
 
             // array de clases que contengan elementos generados dinamicamente
         void    _generate_texture_scene(void);
-
 
         void    _render_main_loop(void);
 //            void __switch_to_dynamic_config()

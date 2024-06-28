@@ -4,8 +4,10 @@ SRC = utils.cpp \
 		Glib.cpp \
 		Canvas.cpp \
 		render_core.cpp \
+		VertexBuffer.cpp \
 		Texture.cpp \
-		ShaderProgram.cpp
+		ShaderProgram.cpp \
+		IndexBuffer.cpp
 CSRC = glad.c
 
 vpath	%.cpp src

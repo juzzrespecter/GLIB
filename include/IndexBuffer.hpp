@@ -8,14 +8,16 @@ class IndexBuffer
     private:
         GLuint buffer_id;
 
-        IndexBuffer(void);
+        IndexBuffer(void) = delete;
     public:
-//        IndexBuffer(std::vector<);
+    IndexBuffer(const std::vector<unsigned int>&, unsigned int, GLuint);
+        IndexBuffer(const std::vector<unsigned int>&, unsigned int); // temp
         IndexBuffer(const IndexBuffer&);
         ~IndexBuffer();
 
-        GLuint GetId() const;
-        
+        void Bind(void) const;
+        void Release(void) const;
+
 };
 
 # endif //__INDEX_BUFFER_HPP

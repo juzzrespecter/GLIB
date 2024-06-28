@@ -2,27 +2,31 @@
 # define __CANVAS_HPP
 
 # include <glib_internals.hpp>
-# include <vector>
+# include <VertexBuffer.hpp>
+# include <IndexBuffer.hpp>
+#include <ShaderProgram.hpp>
 
 // Canvas se compone de una textura, un shaderprogram, un vertexbuffer y un indexbuffer
 
 class Canvas // wes un vertex buffer, o contiene un vertex buffer ??
 {
     private:
-        GLuint _canvas_id;
+        VertexBuffer  *vbo;
+        IndexBuffer   *ibo;
+        ShaderProgram *sp;
+
 
     public:
         Canvas(void);
-        Canvas(GLuint);
         ~Canvas();
 
         void    Init_canvas(const std::vector<float>&, GLuint);
 
-        GLuint  get_id() const;
-        void    set_id(GLuint);
+//        void    Bind(void) const;
+//        void    Release(void) const;
 
-        void    Bind(void) const;
-        void    Release(void) const;
+    // bind y release se tienen que cambiar por un context switch ??
+
 };
 
 #endif // __CANVAS_HPP
