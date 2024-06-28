@@ -4,18 +4,22 @@
 
 class VertexBuffer {
 private:
-    GLuint                   vertex_id;
+    GLuint                   buffer_id;
     const std::vector<float> v_positions;
 
     VertexBuffer(void) = delete;
 
 public:
-    VertexBuffer(const std::vector<float> &); // darle una vuelta a eso
+    VertexBuffer(const std::vector<float> &, unsigned int);
+    VertexBuffer(const std::vector<float> &, unsigned int, GLuint);
     VertexBuffer(const VertexBuffer &);
 
     ~VertexBuffer();
 
     GLuint GetId(void) const;
+
+    void Bind(void) const;
+    void Release(void) const;
 };
 
 #endif //__VERTEX_BUFFER_HPP

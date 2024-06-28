@@ -7,7 +7,7 @@ static void __glib_glfw_error_callback_fn(int error, const char* err_msg)
     std::cerr << "[GLFW] [ERROR] " << err_msg << std::endl;
 }
 
-GLib::GLib(void)
+GLib::GLib(void): __win(nullptr), _scene(nullptr)
 {
     int status = glfwInit();
 
@@ -19,10 +19,10 @@ GLib::GLib(void)
 
 GLib::~GLib()
 {
-    // limpiar escenas
-    if (this->__win)
+    if (__win)
         glfwDestroyWindow(this->__win);
-
+    if (_scene)
+        delete _scene;
     glfwTerminate();
 }
 
@@ -35,41 +35,18 @@ GLib::~GLib()
     (glBufferData)
 
 */
+
+// esta funcion se expone, aqui se crea dinamicame nte el canvas
+// impliaciones en ell flujo predefinido del RT ??
 void GLib::_generate_texture_scene(void)
 {
-//    GLuint  VAO_texture;
-
-    //static const std::vector<float> canvas_vertices = {
-    //    -0.5f, -0.5f,
-    //    0.5f, -0.5f,
-    //    0.0f, 0.5f
-    //};
-
-    static const float canvas_vertices[] = {
-        -0.5f, -0.5f,
-        0.0f, 0.5f,
-        0.5f, -0.5f
-    };
-
-    GLuint  buffer_id;
-    GL_wrap(glGenBuffers(1, &buffer_id));
-    GL_wrap(glBindBuffer(GL_ARRAY_BUFFER, buffer_id));
-    GL_wrap(glBufferData(GL_ARRAY_BUFFER, 
-        6 * sizeof(float), 
-        canvas_vertices,
-        GL_STATIC_DRAW));
-
-//    Canvas_scene.Init_canvas(canvas_vertices, 6 * sizeof(float));
-
+    _scene = new Canvas({-0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f},
+                        sizeof(float) * 6,
+                        {1,2, 3, 4},
+                        sizeof(unsigned int) * 4);
     GL_wrap(glEnableVertexAttribArray(0));
-    GL_wrap(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), NULL));
+    GL_wrap(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), NULL));ShaderProgram sp;
 
-    ShaderProgram sp;
-
-    sp.Bind();
-    std::cout << "[INFO] init canvas | " << sp.GetId() << std::endl;
-
-    // creamos los buffers para la textura y el lienzo
 
 //    GL_wrap(glGenVertexArrays(1, &VAO_texture));
 }

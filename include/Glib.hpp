@@ -7,9 +7,9 @@
 
 class GLib
 {
-    private:
-        GLFWwindow  *__win;
-        Canvas      Canvas_scene;
+private:
+    GLFWwindow  *__win;
+    Canvas      *_scene;
 
             // array de clases que contengan elementos generados dinamicamente
         void    _generate_texture_scene(void);

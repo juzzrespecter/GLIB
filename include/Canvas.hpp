@@ -7,26 +7,23 @@
 #include <ShaderProgram.hpp>
 
 // Canvas se compone de una textura, un shaderprogram, un vertexbuffer y un indexbuffer
-
+// expect VAO, Texture, Uniform tambien para impllemenetar
 class Canvas // wes un vertex buffer, o contiene un vertex buffer ??
 {
     private:
-        VertexBuffer  *vbo;
-        IndexBuffer   *ibo;
-        ShaderProgram *sp;
+        VertexBuffer  vbo;
+        IndexBuffer   ibo;
+        ShaderProgram sp;
 
-
+    Canvas(void) = delete;
     public:
-        Canvas(void);
+        Canvas(const std::vector<float>&, unsigned int,
+               const std::vector<unsigned int>&, unsigned int);
+        Canvas(const Canvas&);
         ~Canvas();
 
-        void    Init_canvas(const std::vector<float>&, GLuint);
-
-//        void    Bind(void) const;
-//        void    Release(void) const;
-
-    // bind y release se tienen que cambiar por un context switch ??
-
+    void Bind(void) const;
+    void Release(void) const;
 };
 
 #endif // __CANVAS_HPP

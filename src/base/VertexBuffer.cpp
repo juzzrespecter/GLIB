@@ -2,7 +2,7 @@
 
 VertexBuffer::VertexBuffer(const std::vector<float>& vb,
                            unsigned int size,
-                           GLuint mode)
+                           GLuint mode): v_positions(vb)
 {
     GL_wrap(glGenBuffers(1, &buffer_id));
     GL_wrap(glBindBuffer(GL_ARRAY_BUFFER, buffer_id));
@@ -10,7 +10,7 @@ VertexBuffer::VertexBuffer(const std::vector<float>& vb,
     GL_wrap(glBindBuffer(GL_ARRAY_BUFFER, 0));
 }
 
-VertexBuffer::VertexBuffer(const std::vector<float>& vb, unsigned int size)
+VertexBuffer::VertexBuffer(const std::vector<float>& vb, unsigned int size): v_positions(vb)
 {
     GL_wrap(glGenBuffers(1, &buffer_id));
     GL_wrap(glBindBuffer(GL_ARRAY_BUFFER, buffer_id));
@@ -21,20 +21,20 @@ VertexBuffer::VertexBuffer(const std::vector<float>& vb, unsigned int size)
     GL_wrap(glBindBuffer(GL_ARRAY_BUFFER, 0));
 }
 
-VertexBuffer::VertexBuffer(const VertexBuffer& o)
+VertexBuffer::VertexBuffer(const VertexBuffer& o): v_positions(o.v_positions)
 {
-GL_wrap(glGenBUffers(1, &buffer_id);
-GL_wrap(glBindBuffer(GL_ARRAY_BUFER, buffer_id);
+    GL_wrap(glGenBuffers(1, &buffer_id));
+    GL_wrap(glBindBuffer(GL_ARRAY_BUFFER, buffer_id));
 }
 
 VertexBuffer::~VertexBuffer()
 {
-glDeleteBuffers(1, buffer_id);
+glDeleteBuffers(1, &buffer_id);
 }
 
 GLuint VertexBuffer::GetId(void) const
 {
-   return (vertex_id);
+   return (buffer_id);
 }
 
 void VertexBuffer::Bind() const
