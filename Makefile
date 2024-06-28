@@ -29,7 +29,7 @@ TEST	= test
 
 # ======= Compilation flags =======
 
-CXX =	    clang++
+CXX =	    g++
 CXXFLAGS = -Wall -Werror -Wextra
 ifdef DEBUG
 	CXXFLAGS += -DDEBUG -fsanitize=address -g3
@@ -37,7 +37,7 @@ endif
 
 CPPFLAGS = -MMD
 INC      = -I $(INC_DIR)
-LDFLAGS  = ${shell pkg-config --libs glfw3} -GL
+LDFLAGS  = ${shell pkg-config --libs glfw3} -lGL
 
 AR		 = ar rcs
 RM		 = rm -fr

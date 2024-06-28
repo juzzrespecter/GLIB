@@ -42,11 +42,11 @@ void GLib::_generate_texture_scene(void)
 {
     _scene = new Canvas({-0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f},
                         sizeof(float) * 6,
-                        {1,2, 3, 4},
-                        sizeof(unsigned int) * 4);
+                        {1,2,3,1,3,4},
+                        sizeof(unsigned int) * 6);
+    _scene->Bind();
     GL_wrap(glEnableVertexAttribArray(0));
-    GL_wrap(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), NULL));ShaderProgram sp;
-
+    GL_wrap(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), NULL));
 
 //    GL_wrap(glGenVertexArrays(1, &VAO_texture));
 }

@@ -2,8 +2,7 @@
 
 Canvas::Canvas(const std::vector<float>& vb, unsigned int vb_size,
        const std::vector<unsigned int>& ib, unsigned int ib_size)
-       : vbo(vb, vb_size), ibo(ib, ib_size), sp() {
-
+       : vbo(vb, vb_size), ibo(ib, ib_size) {
 }
 
 Canvas::~Canvas() {

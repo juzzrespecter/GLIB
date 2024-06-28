@@ -42,10 +42,7 @@ std::string    ShaderProgram::_read_shader_from_file(const std::string& path)
     shader_file.seekg(0);
     std::vector<char> buffer(len_shader);
     shader_file.read(buffer.data(), len_shader);
-
-    std::cerr << "buffer size: " << len_shader << std::endl;
-    std::cerr << "shader path: " << path.c_str() << std::endl;
-    std::cerr << "( " << buffer.data() << " )" << std::endl;
+    std::cout << "Read shader from file" << std::endl;
     return (std::string(buffer.data(), len_shader));
 }
 

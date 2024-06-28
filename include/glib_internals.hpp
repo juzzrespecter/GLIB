@@ -11,7 +11,7 @@
 # include "utils.hpp"
 
 # ifdef DEBUG
-#  define ASSERT(x) if(!(x)) __builtin_debugtrap()
+#  define ASSERT(x) if(!(x)) __builtin_trap()
 #  define GL_wrap(x) GL_clear_error();\
      x;\
      ASSERT(GL_check_error(#x, __FILE__, __LINE__))
