@@ -1,6 +1,7 @@
 #ifndef __SHADER_PROGRAM_HPP
 # define __SHADER_PROGRAM_HPP
 # include <glib_internals.hpp>
+# include <ios>
 
 class ShaderProgram
 {
