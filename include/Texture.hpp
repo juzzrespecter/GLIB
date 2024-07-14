@@ -13,20 +13,20 @@ class Texture
 
         const unsigned int width, height, bpp;
 
-        Texture() = delete;
+
     public:
+    Texture() = delete;
         Texture(unsigned int, unsigned int, unsigned int);
         Texture(const Texture&);
         ~Texture();
 
         GLuint  GetId(void) const;
 
-        char&   operator[](int);
-
         void    Bind(void) const;
         void    Release(void) const;
 
         void    SetBuffer(const char*);
+        void  ResetBuffer(void);
 
         unsigned int    GetMaxSize(void) const;
         unsigned int    GetWidth(void) const;

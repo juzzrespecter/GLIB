@@ -23,7 +23,7 @@ GLuint    ShaderProgram::_compile_shader(const std::string& src, GLenum type)
         glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &len_msg);
         msg = new char[len_msg * sizeof(char)];
         glGetShaderInfoLog(shader_id, len_msg, &len_msg, msg);
-        std::cerr << "[OPENGL] [SHADER [ERROR] " << msg << std::endl; // TODO refactor to log
+        std::cerr << "[OPENGL] [SHADER] [ERROR] " << msg << std::endl; // TODO refactor to log
         delete [] msg;
         throw std::runtime_error("Shader compiler exception"); // TODO refactor exc
     }

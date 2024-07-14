@@ -38,10 +38,10 @@ GLuint IndexBuffer::GetId() const
 
 void IndexBuffer::Bind(void) const
 {
-glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer_id);
+    GL_wrap(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer_id));
 }
 
 void IndexBuffer::Release(void) const
 {
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    GL_wrap(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 }

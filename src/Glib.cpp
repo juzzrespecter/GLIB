@@ -38,11 +38,11 @@ GLib::~GLib()
 
 // esta funcion se expone, aqui se crea dinamicame nte el canvas
 // impliaciones en ell flujo predefinido del RT ??
-void GLib::_generate_texture_scene(void)
+void GLib::_generate_texture_scene()
 {
-    _scene = new Canvas({-0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, -0.5f, 0.5f},
-                        sizeof(float) * 6,
-                        {1,2,3,1,3,4},
+    _scene = new Canvas({-1.0f, -1.0, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f},
+                        sizeof(float) * 8,
+                        {0,1,2,0,2,3},
                         sizeof(unsigned int) * 6);
     _scene->Bind();
     GL_wrap(glEnableVertexAttribArray(0));

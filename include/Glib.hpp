@@ -12,9 +12,9 @@ private:
     Canvas      *_scene;
 
             // array de clases que contengan elementos generados dinamicamente
-        void    _generate_texture_scene(void);
+        void    _generate_texture_scene();
 
-        void    _render_main_loop(void);
+        void    _render_main_loop();
 //            void __switch_to_dynamic_config()
 
     public:
@@ -22,6 +22,7 @@ private:
         ~GLib(void);
 
         void create_context(unsigned int, unsigned int);
+        void add_texture(const std::vector<unsigned char>&);
         void render(); // temporal
 //            void create_scene_buffer();
 // // //            void destroy_scene_buffer();
