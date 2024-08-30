@@ -6,7 +6,7 @@ Texture::Texture(unsigned int w, unsigned int h, unsigned int bpp)
      glGenTextures(1, &texture_id);
 }
 
-Texture::Texture(const Texture& o): width(o.width), height(o.height), bpp(o.bpp), texture_id(0)
+Texture::Texture(const Texture& o):texture_id(0), width(o.width), height(o.height), bpp(o.bpp)
 {
     buffer.assign(o.buffer.begin(), o.buffer.end());
 

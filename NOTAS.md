@@ -23,3 +23,5 @@ Hook en un boton de la Gui.
 ### TODO
 - Abstraer todos los objetos nativos de OpenGL
 - Clase logger
+- Clase VAO: que abstraemos aqui, como hace conflicto con canvas
+- Replantear clase canvas

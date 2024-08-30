@@ -26,7 +26,7 @@ GLib::~GLib()
     glfwTerminate();
 }
 
-/* Creacion del Vertex Buffer:
+/** Creacion del Vertex Buffer:
 
     Creamos un buffer (glGenBuffers) y obtenemos el identificador.
     Seleccionamos (bindeamos) el buffer, informamos sobre el tipo de buffer con el 
