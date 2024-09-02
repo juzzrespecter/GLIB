@@ -27,6 +27,6 @@ int main()
 
     test.create_context(600, 600);
     buffer = generate_espana(600, 600);
-    (void) buffer;
+    test.add_texture(buffer);
     test.render();
 }

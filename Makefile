@@ -7,7 +7,8 @@ SRC = utils.cpp \
 		VertexBuffer.cpp \
 		Texture.cpp \
 		ShaderProgram.cpp \
-		IndexBuffer.cpp
+		IndexBuffer.cpp \
+		VAO.cpp
 CSRC = glad.c
 
 vpath	%.cpp src

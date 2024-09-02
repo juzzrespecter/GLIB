@@ -14,6 +14,20 @@ Los shaders deben soportar de salida la textura, inconvenientes? Solo deberia se
 bindeado la textura con `glVertexAttribPointer` antes de la llamada a glDrawElements. La textura debe seguir siendo
 independiente del shader (competencia del canvas)
 
+PROCESOS QUE SON FIJOS EN LA RENDERIZACION ESTATICA:
+- ShaderProgram
+- VBO
+- IBO
+
+PROCESOS DINAMICOS:
+- Textura
+
+### glVertexAttribPointer
+
+### glTexture
+
+### Generacion de textura a traves de un buffer
+
 ### Cambio de tipos de escena
 Hook en un boton de la Gui.
 

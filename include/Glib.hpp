@@ -5,30 +5,33 @@
 # include <VertexBuffer.hpp>
 # include <IndexBuffer.hpp>
 
-class GLib
-{
+class GLib {
 private:
-    GLFWwindow  *__win;
-    Canvas      *_scene;
+    GLFWwindow *_win;
+    Canvas *_scene;
 
-            // array de clases que contengan elementos generados dinamicamente
-        void    _generate_texture_scene();
+    // array de clases que contengan elementos generados dinamicamente
+    static void _glfw_error_callback_fn(int, const char*);
+    void _generate_texture_scene();
 
-        void    _render_main_loop();
-//            void __switch_to_dynamic_config()
+    void _render_main_loop();
 
-    public:
-        GLib(void);
-        ~GLib(void);
+    //            void __switch_to_dynamic_config()
 
-        void create_context(unsigned int, unsigned int);
-        void add_texture(const std::vector<unsigned char>&);
-        void render(); // temporal
-//            void create_scene_buffer();
-// // //            void destroy_scene_buffer();
-//            void init_rendering();
-//            void switch_context();
+public:
+    GLib(void);
 
+    ~GLib(void);
+
+    void create_context(unsigned int, unsigned int);
+
+    void add_texture(const std::vector<unsigned char> &);
+
+    void render(); // temporal
+    //            void create_scene_buffer();
+    // // //            void destroy_scene_buffer();
+    //            void init_rendering();
+    //            void switch_context();
 };
 
 

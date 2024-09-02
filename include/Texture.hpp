@@ -1,5 +1,5 @@
-#ifndef __TEXTURE_HPP
-# define __TEXTURE_HPP
+#ifndef TEXTURE_HPP
+# define TEXTURE_HPP
 # include <glib_internals.hpp>
 # include <vector>
 
@@ -20,18 +20,18 @@ class Texture
         Texture(const Texture&);
         ~Texture();
 
-        GLuint  GetId(void) const;
+        GLuint  GetId() const;
 
-        void    Bind(void) const;
-        void    Release(void) const;
+        void    Bind() const;
+        void    Release() const;
 
         void    SetBuffer(const char*);
-        void  ResetBuffer(void);
+        void  ResetBuffer();
 
-        unsigned int    GetMaxSize(void) const;
-        unsigned int    GetWidth(void) const;
-        unsigned int    GetHeight(void) const;
-        unsigned int    GetBitsPerPixel(void) const;
+        unsigned int    GetMaxSize() const;
+        unsigned int    GetWidth() const;
+        unsigned int    GetHeight() const;
+        unsigned int    GetBitsPerPixel() const;
 };
 
-#endif // __TEXTURE_HPP
+#endif // TEXTURE_HPP

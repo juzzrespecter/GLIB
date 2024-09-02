@@ -1,17 +1,17 @@
 #include <Glib.hpp>
 #include <ShaderProgram.hpp>
 
-static void __glib_glfw_error_callback_fn(int error, const char* err_msg)
+void GLib::_glfw_error_callback_fn(int error, const char* err_msg)
 {
     std::cerr << "[GLFW] [ERROR] GLFW failed with error code: " << error << std::endl;
     std::cerr << "[GLFW] [ERROR] " << err_msg << std::endl;
 }
 
-GLib::GLib(void): __win(nullptr), _scene(nullptr)
+GLib::GLib(): _win(nullptr), _scene(nullptr)
 {
     int status = glfwInit();
 
-    glfwSetErrorCallback(__glib_glfw_error_callback_fn);
+    glfwSetErrorCallback(_glfw_error_callback_fn);
 
     if (status != GLFW_TRUE)
         throw glib_runtime_exception("GLFW init error");
@@ -19,10 +19,9 @@ GLib::GLib(void): __win(nullptr), _scene(nullptr)
 
 GLib::~GLib()
 {
-    if (__win)
-        glfwDestroyWindow(this->__win);
-    if (_scene)
-        delete _scene;
+    if (_win)
+        glfwDestroyWindow(this->_win);
+    delete _scene;
     glfwTerminate();
 }
 
@@ -46,20 +45,20 @@ void GLib::_generate_texture_scene()
                         sizeof(unsigned int) * 6);
     _scene->Bind();
     GL_wrap(glEnableVertexAttribArray(0));
-    GL_wrap(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), NULL));
+    GL_wrap(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr));
 
 //    GL_wrap(glGenVertexArrays(1, &VAO_texture));
 }
 
 void    GLib::create_context(unsigned int w, unsigned int h)
 {
-    __win = glfwCreateWindow(w, h, "Test title", NULL, NULL);
+    _win = glfwCreateWindow(w, h, "Test title", nullptr, nullptr);
 
-    if (!__win)
+    if (!_win)
     {
         throw glib_runtime_exception("window initialization error");
     }
-    glfwMakeContextCurrent(__win);
+    glfwMakeContextCurrent(_win);
 
         // hints
     //glfwWindowHint(int hint, int value);
@@ -77,7 +76,14 @@ void    GLib::create_context(unsigned int w, unsigned int h)
     _generate_texture_scene();
 }
 
-void    GLib::render(void)
+void GLib::add_texture(const std::vector<unsigned char> &data) {
+
+}
+
+/**
+ * Definicion temporal
+ */
+void    GLib::render()
 {
     _render_main_loop();
 }

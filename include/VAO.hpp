@@ -2,6 +2,9 @@
 # define VAO_HPP
 
 # include <glib_internals.hpp>
+
+// probablemente algo para los atributos
+
 /**
 * Clase de cobertura de un Vertex Array Object o VAO,
 * encapsula un Vertex Buffer con una configuración o layout para poder accionar
