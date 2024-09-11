@@ -4,11 +4,16 @@
 # include <Canvas.hpp>
 # include <VertexBuffer.hpp>
 # include <IndexBuffer.hpp>
+#include <Texture.hpp>
 
 class GLib {
 private:
+    unsigned int Window_Height;
+    unsigned int Window_Width;
+
     GLFWwindow *_win;
     Canvas *_scene;
+    Texture *_texture; // temporal para prueba
 
     // array de clases que contengan elementos generados dinamicamente
     static void _glfw_error_callback_fn(int, const char*);
@@ -19,13 +24,18 @@ private:
     //            void __switch_to_dynamic_config()
 
 public:
-    GLib(void);
+    GLib();
 
-    ~GLib(void);
+    /**
+     * Contructor con parametros de ventana.
+     */
+    GLib(unsigned int, unsigned int);
+
+    ~GLib();
 
     void create_context(unsigned int, unsigned int);
 
-    void add_texture(const std::vector<unsigned char> &);
+    void add_texture(int, int, const std::vector<char> &);
 
     void render(); // temporal
     //            void create_scene_buffer();

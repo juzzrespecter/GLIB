@@ -23,6 +23,14 @@ PROCESOS DINAMICOS:
 - Textura
 
 ### glVertexAttribPointer
+VAO guarda un estado interno, y cada vez que anyadimos un nuevo elemento, debemos actualizarlo con 
+los nuevos  atributos.
+Se define un array de atributos vertex -> Se necesita definir como se vincula esto a un Vertex Buffer.
+El indice es el indice generado por la creacion del VAO.
+Count es el numero de elementos, con limite en 4 (entiendo que solo puede haber cuatro componentes por
+atributo, cuales), stride indica el tamanyo de cada elemento.
+
+Anyadir un buffer al VAO. Cada llamada a `glVertexAttribPointer` implica un override de la anterior??
 
 ### glTexture
 
@@ -33,6 +41,8 @@ Hook en un boton de la Gui.
 
 ### Investigar
 - Distintas clases para el renderizado dinamico y estatico
+
+
 
 ### TODO
 - Abstraer todos los objetos nativos de OpenGL

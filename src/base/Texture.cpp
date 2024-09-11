@@ -41,7 +41,7 @@ void    Texture::SetBuffer(const char* buffer_array)
 
     GL_wrap(glBindTexture(GL_TEXTURE_2D_ARRAY, texture_id));
     GL_wrap(glTexImage2D(
-        GL_TEXTURE_2D, 0, GL_RGBA,
+        GL_TEXTURE_2D, 0, GL_RGB,
         width, height,0,
         GL_RGBA, GL_UNSIGNED_BYTE,buffer.data())
         );

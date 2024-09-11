@@ -10,20 +10,22 @@
 // expect VAO, Texture, Uniform tambien para impllemenetar
 class Canvas // wes un vertex buffer, o contiene un vertex buffer ??
 {
-    private:
-        VertexBuffer  vbo;
-        IndexBuffer   ibo;
-        ShaderProgram sp;
+private:
+    VertexBuffer vbo;
+    IndexBuffer ibo;
+    ShaderProgram sp;
+public:
+    Canvas() = delete;
+    Canvas(const std::vector<float> &, unsigned int,
+           const std::vector<unsigned int> &, unsigned int);
 
-    Canvas(void) = delete;
-    public:
-        Canvas(const std::vector<float>&, unsigned int,
-               const std::vector<unsigned int>&, unsigned int);
-        Canvas(const Canvas&);
-        ~Canvas();
+    Canvas(const Canvas &);
 
-    void Bind(void) const;
-    void Release(void) const;
+    ~Canvas();
+
+    void Bind() const;
+
+    void Release() const;
 };
 
 #endif // __CANVAS_HPP

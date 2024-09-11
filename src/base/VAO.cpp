@@ -1,19 +1,53 @@
+#include <numeric>
 #include <VAO.hpp>
 
-VAO::VAO()
-{
+VertexBufferLayout::VertexBufferLayout(): elements(), stride(0) {
+}
+
+VertexBufferLayout::~VertexBufferLayout() {
 
 }
 
-VAO::~VAO()
-{
+GLuint VertexBufferLayout::GetStride() const {
+    return stride;
 }
 
-void VAO::Bind() const {
+const VertexBufferLayout::GL_vector_element &VertexBufferLayout::GetElements() const {
+    return elements;
+}
+
+VAO::VAO(): vao_id(0) {
+    GL_wrap(glGenVertexArrays(1, &vao_id));
+    GL_wrap(glBindVertexArray(vao_id));
+}
+
+VAO::~VAO() {
+    glDeleteVertexArrays(1, &vao_id);
+}
+
+void VAO::Bind(const VertexBuffer& vb, const VertexBufferLayout& layout) const {
+    // cada indice es una llamada a enable vertex attrib array
+    // cada layout es una llamada a vertexattribpointer
+    // checkear diferencia entre vertex array objects y vertex attributes
+
+    vb.Bind();
+    const auto& elements = layout.GetElements();
+    unsigned int offset = 0;
+    for (unsigned int i = 0; i < elements.size(); i++) {
+        auto& element = elements[i];
+
+        GL_wrap(glEnableVertexAttribArray(vao_id));
+        GL_wrap(glVertexAttribPointer(i, element.size, element.type, element.normalized,
+            layout.GetStride(), (const void*)offset));
+        offset += element.size * VertexBufferElement::GetSize(element.type);
+    }
 
 }
 
 void VAO::Release() const {
-
+    glBindVertexArray(0);
 }
 
+GLuint VAO::GetId() const {
+    return vao_id;
+}
