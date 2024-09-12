@@ -30,7 +30,7 @@ void    Texture::Release(void) const
 
 void    Texture::SetBuffer(const char* buffer_array)
 {
-    std::string buffer_string(buffer_array);
+    std::string buffer_string = buffer_array;
     buffer.assign(buffer_string.begin(),
                   buffer_string.end());
 

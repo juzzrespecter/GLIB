@@ -73,11 +73,9 @@ void GLib::create_context(unsigned int w, unsigned int h) {
  * Delegamos la gestion del tamanyo de la textura en la configuracion global de la escena.
  * @param data
  */
-void GLib::add_texture(int w, int h, const std::vector<char> &data) {
-    (void) data;
-
+void GLib::add_texture(int w, int h, const std::vector<unsigned char> &data) {
     _texture = new Texture(w, h, 3);
-    _texture->SetBuffer(data.data());
+    _texture->SetBuffer(data);
 }
 
 /**

@@ -25,7 +25,7 @@ class Texture
         void    Bind() const;
         void    Release() const;
 
-        void    SetBuffer(const char*);
+        void    SetBuffer(const std::vector<unsigned char*>&);
         void  ResetBuffer();
 
         unsigned int    GetMaxSize() const;

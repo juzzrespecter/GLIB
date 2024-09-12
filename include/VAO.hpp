@@ -1,6 +1,7 @@
 #ifndef VAO_HPP
 # define VAO_HPP
 
+#include <cassert>
 # include <glib_internals.hpp>
 #include <VertexBuffer.hpp>
 
@@ -23,7 +24,7 @@ struct VertexBufferElement {
       case GL_UNSIGNED_INT: return 4;
       case GL_FLOAT: return 4;
       default: {
-        static_assert(false);
+        assert(false);
         return 0;
       };
     }

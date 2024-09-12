@@ -35,7 +35,7 @@ public:
 
     void create_context(unsigned int, unsigned int);
 
-    void add_texture(int, int, const std::vector<char> &);
+    void add_texture(int, int, const std::vector<unsigned char> &);
 
     void render(); // temporal
     //            void create_scene_buffer();
