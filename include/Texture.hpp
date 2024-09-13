@@ -3,8 +3,9 @@
 # include <glib_internals.hpp>
 # include <vector>
 
-// la textura es el buffer
-
+/**
+ *
+ */
 class Texture
 {
     private:
@@ -25,12 +26,15 @@ class Texture
         void    Bind() const;
         void    Release() const;
 
-        void    SetBuffer(const std::vector<unsigned char*>&);
+        void    SetBuffer(const std::vector<unsigned char>&) const;
         void  ResetBuffer();
 
         unsigned int    GetMaxSize() const;
-        unsigned int    GetWidth() const;
-        unsigned int    GetHeight() const;
+
+        unsigned int GetWidth() const;
+
+        unsigned int GetHeight() const;
+
         unsigned int    GetBitsPerPixel() const;
 };
 

@@ -26,6 +26,10 @@ public:
     void Bind() const;
 
     void Release() const;
+
+    const ShaderProgram& GetShaderProgram() const;
+    const VertexBuffer& GetVertexBuffer() const;
+    const IndexBuffer& GetIndexBuffer() const;
 };
 
 #endif // __CANVAS_HPP

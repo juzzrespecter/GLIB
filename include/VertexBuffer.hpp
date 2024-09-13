@@ -7,7 +7,7 @@ private:
     GLuint                   buffer_id;
     const std::vector<float> v_positions;
 
-    VertexBuffer(void) = delete;
+    VertexBuffer() = delete;
 
 public:
     VertexBuffer(const std::vector<float> &, unsigned int);
@@ -16,10 +16,10 @@ public:
 
     ~VertexBuffer();
 
-    GLuint GetId(void) const;
+    GLuint GetId() const;
 
-    void Bind(void) const;
-    void Release(void) const;
+    void Bind() const;
+    void Release() const;
 };
 
 #endif //__VERTEX_BUFFER_HPP

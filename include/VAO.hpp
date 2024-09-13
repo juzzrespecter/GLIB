@@ -51,37 +51,47 @@ public:
 
   ~VertexBufferLayout();
 
-  template<
+  /*template<
     typename Int,
     typename std::enable_if<std::is_integral_v<Int> && std::is_signed_v<Int>>::type* = nullptr
   >
   void Push(Int size) {
-    elements.push_back({GL_INT, size, GL_FALSE});
-    stride += VertexBufferElement::GetSize(GL_INT);
-  }
 
-  template<
+  }*/
+
+  /*template<
     typename UInt,
     typename std::enable_if<std::is_integral_v<UInt> && !std::is_signed_v<UInt>>::type* = nullptr
   >
-  void Push(UInt size) {
+  void Push(GLint size, UInt type) {
     elements.push_back({GL_UNSIGNED_INT, size, GL_FALSE});
     stride +=  VertexBufferElement::GetSize(GL_UNSIGNED_INT);
+  }*/
+
+  template<typename T>
+  void Push(GLint size) {
+    (void) size;
+
+    assert(false);
   }
 
-  template<
+
+
+  /*template<
     typename Float,
     typename std::enable_if<std::is_floating_point_v<Float> >::type* = nullptr
   >
   void Push(Float size) {
     elements.push_back({GL_FLOAT, size, GL_FALSE});
     stride += VertexBufferElement::GetSize(GL_FLOAT);
-  }
+  }*/
 
   GLuint GetStride() const;
 
   const GL_vector_element &GetElements() const;
 };
+
+
 
 
 /**
@@ -97,22 +107,19 @@ public:
 class VAO {
 private:
   GLuint vao_id;
-  GLuint stride;
-
-  std::vector<VertexBufferLayout> layouts;
 
 public:
   VAO();
 
   ~VAO();
 
-  void Bind(const VertexBuffer&, const VertexBufferLayout&) const;
+  void Bind() const;
 
   void Release() const;
 
   GLuint GetId() const;
 
-  void AddBuffer(const VertexBuffer &, const VertexBufferLayout &);
+  void AddBuffer(const VertexBuffer &, const VertexBufferLayout &) const;
 };
 
 #endif // VAO_HPP

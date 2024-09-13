@@ -4,6 +4,7 @@ Texture::Texture(unsigned int w, unsigned int h, unsigned int bpp)
     : texture_id(0), buffer(w * h * bpp), width(w), height(h), bpp(bpp)
 {
      glGenTextures(1, &texture_id);
+     glBindTexture(GL_TEXTURE_2D, texture_id);
 }
 
 Texture::Texture(const Texture& o):texture_id(0), width(o.width), height(o.height), bpp(o.bpp)
@@ -18,22 +19,18 @@ Texture::~Texture()
     glDeleteTextures(1, &texture_id); // TODO
 }
 
-void    Texture::Bind(void) const
+void    Texture::Bind() const
 {
     GL_wrap(glBindTexture(GL_TEXTURE_2D, texture_id));
 }
 
-void    Texture::Release(void) const
+void    Texture::Release() const
 {
     GL_wrap(glBindTexture(GL_TEXTURE_2D, 0));
 }
 
-void    Texture::SetBuffer(const char* buffer_array)
+void    Texture::SetBuffer(const std::vector<unsigned char> &buffer) const
 {
-    std::string buffer_string = buffer_array;
-    buffer.assign(buffer_string.begin(),
-                  buffer_string.end());
-
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -47,23 +44,23 @@ void    Texture::SetBuffer(const char* buffer_array)
         );
 }
 
-void    Texture::ResetBuffer(void) {
+void    Texture::ResetBuffer() {
 
 }
 
-unsigned int    Texture::GetMaxSize(void) const {
+unsigned int    Texture::GetMaxSize() const {
     return (width * height * bpp);
 }
 
-unsigned int    Texture::GetWidth(void) const {
+unsigned int    Texture::GetWidth() const {
     return (width);
 }
 
-unsigned int    Texture::GetHeight(void) const {
+unsigned int    Texture::GetHeight() const {
     return (height);
 }
 
-unsigned int    Texture::GetBitsPerPixel(void) const {
+unsigned int    Texture::GetBitsPerPixel() const {
     return (bpp);
 }
 

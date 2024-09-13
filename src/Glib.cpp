@@ -34,16 +34,19 @@ GLib::~GLib() {
 
 // esta funcion se expone, aqui se crea dinamicame nte el canvas
 // impliaciones en ell flujo predefinido del RT ??
+
+// la creacionb del buffer ya tienen en cuenta las coordenadas de textura
+// la textura es un attributo del vertex, se anyade una config para el VAO
 void GLib::_generate_texture_scene() {
-    _scene = new Canvas({-1.0f, -1.0, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f},
-                        sizeof(float) * 8,
-                        {0, 1, 2, 0, 2, 3},
-                        sizeof(unsigned int) * 6);
+    _scene = new Canvas(Canvas_VertexData, sizeof(float) * Canvas_VertexData.size(),
+                        Canvas_IndexData, sizeof(unsigned int) * Canvas_IndexData.size());
     _scene->Bind();
+    VertexBufferLayout buffer_layout;;
+//    buffer_layout.Push({GL_FLOAT, })
+    _scene_vao = new VAO();
+    //_scene_vao->AddBuffer(_scene->GetVertexBuffer(), )
     GL_wrap(glEnableVertexAttribArray(0));
     GL_wrap(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr));
-
-    //    GL_wrap(glGenVertexArrays(1, &VAO_texture));
 }
 
 void GLib::create_context(unsigned int w, unsigned int h) {

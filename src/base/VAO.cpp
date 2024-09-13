@@ -25,11 +25,11 @@ VAO::~VAO() {
     glDeleteVertexArrays(1, &vao_id);
 }
 
-void VAO::Bind(const VertexBuffer& vb, const VertexBufferLayout& layout) const {
+void VAO::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout) const {
     // cada indice es una llamada a enable vertex attrib array
     // cada layout es una llamada a vertexattribpointer
     // checkear diferencia entre vertex array objects y vertex attributes
-
+    Bind();
     vb.Bind();
     const auto& elements = layout.GetElements();
     unsigned int offset = 0;
@@ -44,8 +44,18 @@ void VAO::Bind(const VertexBuffer& vb, const VertexBufferLayout& layout) const {
 
 }
 
+template<>
+  void VertexBufferLayout::Push<GLint>(GLint size) {
+    elements.push_back({GL_INT, size, GL_FALSE});
+    stride += VertexBufferElement::GetSize(GL_INT);
+}
+
+void VAO::Bind() const {
+    GL_wrap(glBindVertexArray(vao_id));
+}
+
 void VAO::Release() const {
-    glBindVertexArray(0);
+    GL_wrap(glBindVertexArray(0));
 }
 
 GLuint VAO::GetId() const {

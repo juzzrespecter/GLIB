@@ -5,6 +5,7 @@
 # include <VertexBuffer.hpp>
 # include <IndexBuffer.hpp>
 #include <Texture.hpp>
+#include <VAO.hpp>
 
 class GLib {
 private:
@@ -13,6 +14,7 @@ private:
 
     GLFWwindow *_win;
     Canvas *_scene;
+    VAO        *_scene_vao;
     Texture *_texture; // temporal para prueba
 
     // array de clases que contengan elementos generados dinamicamente
@@ -22,6 +24,18 @@ private:
     void _render_main_loop();
 
     //            void __switch_to_dynamic_config()
+
+    /* Canvas vertex attribute info */
+    const std::vector<float> Canvas_VertexData = {
+        -1.0f, -1.0f,  0.0f, 0.0f,
+         1.0f, -1.0f,  1.0f, 0.0f,
+         1.0f, 1.0f,   1.0f, 1.0f,
+        -1.0f, 1.0f,   0.0f, 1.0f
+    };
+
+    const std::vector<unsigned int> Canvas_IndexData = {
+        0, 1, 2, 0, 2, 3
+    };
 
 public:
     GLib();

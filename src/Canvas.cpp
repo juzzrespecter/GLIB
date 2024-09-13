@@ -20,3 +20,15 @@ void Canvas::Release(void) const {
     ibo.Release();
     sp.Release();
 }
+
+const VertexBuffer& Canvas::GetVertexBuffer() const {
+    return vbo;
+}
+
+const IndexBuffer& Canvas::GetIndexBuffer() const {
+    return ibo;
+}
+
+const ShaderProgram& Canvas::GetShaderProgram() const {
+    return sp;
+}
