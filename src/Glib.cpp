@@ -59,11 +59,12 @@ void GLib::_generate_texture_scene() {
                         Canvas_IndexData, sizeof(unsigned int) * Canvas_IndexData.size());
     _scene->Bind();
     VertexBufferLayout buffer_layout;;
-//    buffer_layout.Push({GL_FLOAT, })
+    buffer_layout.Push<GLfloat>(4);
+    buffer_layout.Push<GLfloat>(2);
     _scene_vao = new VAO();
-    //_scene_vao->AddBuffer(_scene->GetVertexBuffer(), )
-    GL_wrap(glEnableVertexAttribArray(0));
-    GL_wrap(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr));
+    _scene_vao->AddBuffer(_scene->GetVertexBuffer(), buffer_layout);
+    //GL_wrap(glEnableVertexAttribArray(0));
+    //GL_wrap(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr));
 }
 
 void GLib::create_context(unsigned int w, unsigned int h) {

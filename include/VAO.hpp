@@ -34,8 +34,8 @@ struct VertexBufferElement {
 
 /**
  * Clase que abstrae el layout a aplicar sobre un VAO.
- * @elements:
- * @stride:
+ * @elements: Lista de informacion sobre los atributos a aplicar.
+ * @stride: Tamanyo del vertex definido en el layout.
  */
 class VertexBufferLayout {
 private:
@@ -72,8 +72,6 @@ public:
 * con glVertexAttribPointer.
 *
 * @vao_id: identificador interno de OpenGL para la instancia creada de VAO.
-* @stride:
-* @
 */
 
 class VAO {
