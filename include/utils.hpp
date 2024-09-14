@@ -4,12 +4,12 @@
 #include <stdexcept>
 
 bool GL_check_error(const char *, const char *, int);
-void GL_clear_error(void);
+void GL_clear_error();
 
 class glib_runtime_exception: public std::runtime_error
 {
     protected:
-        glib_runtime_exception(void);
+        glib_runtime_exception();
 
     public:
         glib_runtime_exception(const std::string);

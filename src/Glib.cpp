@@ -1,9 +1,26 @@
+#include <charconv>
 #include <Glib.hpp>
 #include <ShaderProgram.hpp>
 
 void GLib::_glfw_error_callback_fn(int error, const char *err_msg) {
     std::cerr << "[GLFW] [ERROR] GLFW failed with error code: " << error << std::endl;
     std::cerr << "[GLFW] [ERROR] " << err_msg << std::endl;
+}
+
+void GLib::_gl_debug_callback_fn( GLenum source,
+                 GLenum type,
+                 GLuint id,
+                 GLenum severity,
+                 GLsizei length,
+                 const GLchar* message,
+                 const void* userParam ) {
+    (void) source, (void) id, (void) length, (void) userParam;
+
+    std::string err_type = (type == GL_DEBUG_TYPE_ERROR) ? " [ERROR] " : " ";
+    std::cerr << "[GL] [DEBUG]" << err_type;
+    std::cerr << std::hex << "0x" << type << " ";;
+    std::cerr << std::hex << "0x" << severity << " ";
+    std::cerr << message << std::dec << std::endl;
 }
 
 GLib::GLib(): _win(nullptr), _scene(nullptr) {
@@ -66,9 +83,15 @@ void GLib::create_context(unsigned int w, unsigned int h) {
         std::cerr << "[GLAD] [ERROR] could not initializate OpenGL" << std::endl; // temporal
         throw glib_runtime_exception("GLAD initialization error");
     }
-    // log opengl version
     // glViewport ??
+    std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
     GL_wrap(glViewport(0, 0, w, h)); //temp
+
+#ifdef DEBUG
+    glEnable(GL_DEBUG_OUTPUT);
+    glDebugMessageCallback(_gl_debug_callback_fn, 0);
+#endif
+
     _generate_texture_scene();
 }
 

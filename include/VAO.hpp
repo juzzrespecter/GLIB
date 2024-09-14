@@ -51,40 +51,12 @@ public:
 
   ~VertexBufferLayout();
 
-  /*template<
-    typename Int,
-    typename std::enable_if<std::is_integral_v<Int> && std::is_signed_v<Int>>::type* = nullptr
-  >
-  void Push(Int size) {
-
-  }*/
-
-  /*template<
-    typename UInt,
-    typename std::enable_if<std::is_integral_v<UInt> && !std::is_signed_v<UInt>>::type* = nullptr
-  >
-  void Push(GLint size, UInt type) {
-    elements.push_back({GL_UNSIGNED_INT, size, GL_FALSE});
-    stride +=  VertexBufferElement::GetSize(GL_UNSIGNED_INT);
-  }*/
-
   template<typename T>
   void Push(GLint size) {
     (void) size;
 
     assert(false);
   }
-
-
-
-  /*template<
-    typename Float,
-    typename std::enable_if<std::is_floating_point_v<Float> >::type* = nullptr
-  >
-  void Push(Float size) {
-    elements.push_back({GL_FLOAT, size, GL_FALSE});
-    stride += VertexBufferElement::GetSize(GL_FLOAT);
-  }*/
 
   GLuint GetStride() const;
 

@@ -13,12 +13,15 @@ private:
     unsigned int Window_Width;
 
     GLFWwindow *_win;
-    Canvas *_scene;
+    Canvas     *_scene;
     VAO        *_scene_vao;
-    Texture *_texture; // temporal para prueba
+    Texture    *_texture; // temporal para prueba
 
     // array de clases que contengan elementos generados dinamicamente
+
     static void _glfw_error_callback_fn(int, const char*);
+    static void _gl_debug_callback_fn(GLenum, GLenum, GLuint, GLenum, GLsizei, const GLchar*, const void*);
+
     void _generate_texture_scene();
 
     void _render_main_loop();

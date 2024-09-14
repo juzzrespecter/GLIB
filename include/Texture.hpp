@@ -16,7 +16,7 @@ class Texture
 
 
     public:
-    Texture() = delete;
+        Texture();
         Texture(unsigned int, unsigned int, unsigned int);
         Texture(const Texture&);
         ~Texture();

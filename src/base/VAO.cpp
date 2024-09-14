@@ -50,6 +50,18 @@ template<>
     stride += VertexBufferElement::GetSize(GL_INT);
 }
 
+template<>
+void VertexBufferLayout::Push<GLuint>(GLint size) {
+    elements.push_back({GL_UNSIGNED_INT, size, GL_FALSE});
+    stride +=  VertexBufferElement::GetSize(GL_UNSIGNED_INT);
+}
+
+template<>
+void VertexBufferLayout::Push<GLfloat>(GLint size) {
+    elements.push_back({GL_FLOAT, size, GL_FALSE});
+    stride += VertexBufferElement::GetSize(GL_FLOAT);
+}
+
 void VAO::Bind() const {
     GL_wrap(glBindVertexArray(vao_id));
 }
