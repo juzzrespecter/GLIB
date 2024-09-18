@@ -1,34 +1,38 @@
 #include <Canvas.hpp>
 
-Canvas::Canvas(const std::vector<float>& vb, unsigned int vb_size,
-       const std::vector<unsigned int>& ib, unsigned int ib_size)
-       : vbo(vb, vb_size), ibo(ib, ib_size) {
+Canvas::Canvas(): vbo(Canvas_VertexData), ibo(Canvas_IndexData) {
+    std::cout << "Generating canvas ...\n";
+    VertexBufferLayout buffer_layout;;
+
+    buffer_layout.Push<GLfloat>(3);
+    buffer_layout.Push<GLfloat>(2);
+    vao.AddBuffer(GetVertexBuffer(), buffer_layout);
 }
 
 Canvas::~Canvas() {
-
+    std::cout << "Deleting canvas ... \n";
 }
 
-void Canvas::Bind(void) const {
-    vbo.Bind();
+void Canvas::Bind() const {
+    vao.Bind();
     ibo.Bind();
     sp.Bind();
 }
 
-void Canvas::Release(void) const {
-    vbo.Release();
+void Canvas::Release() const {
+    vao.Release();
     ibo.Release();
     sp.Release();
 }
 
-const VertexBuffer& Canvas::GetVertexBuffer() const {
+const VertexBuffer &Canvas::GetVertexBuffer() const {
     return vbo;
 }
 
-const IndexBuffer& Canvas::GetIndexBuffer() const {
+const IndexBuffer &Canvas::GetIndexBuffer() const {
     return ibo;
 }
 
-const ShaderProgram& Canvas::GetShaderProgram() const {
+const ShaderProgram &Canvas::GetShaderProgram() const {
     return sp;
 }

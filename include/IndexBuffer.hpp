@@ -3,24 +3,27 @@
 
 # include <glib_internals.hpp>
 
-class IndexBuffer
-{
-    private:
-        GLuint buffer_id;
+class IndexBuffer {
+private:
+    GLuint buffer_id;
 
-        std::vector<unsigned int> indices;
-        IndexBuffer(void) = delete;
-    public:
-    IndexBuffer(const std::vector<unsigned int>&, unsigned int, GLuint);
-        IndexBuffer(const std::vector<unsigned int>&, unsigned int); // temp
-        IndexBuffer(const IndexBuffer&);
-        ~IndexBuffer();
+    std::vector<unsigned int> indices;
 
-        GLuint GetId(void) const;
+    IndexBuffer(void) = delete;
 
-        void Bind(void) const;
-        void Release(void) const;
+public:
+    IndexBuffer(const std::vector<unsigned int> &, GLuint);
 
+    IndexBuffer(const std::vector<unsigned int> &); // temp
+    IndexBuffer(const IndexBuffer &);
+
+    ~IndexBuffer();
+
+    GLuint GetId() const;
+
+    void Bind() const;
+
+    void Release() const;
 };
 
 # endif //__INDEX_BUFFER_HPP

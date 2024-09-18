@@ -13,14 +13,22 @@ private:
     unsigned int Window_Width;
 
     GLFWwindow *_win;
-    Canvas     *_scene;
     VAO        *_scene_vao;
     Texture    *_texture; // temporal para prueba
 
+    Canvas     _scene;
+
     // array de clases que contengan elementos generados dinamicamente
+
+    // documentar clases necesarias
+    // - esfera
+    // - toro
 
     static void _glfw_error_callback_fn(int, const char*);
     static void _gl_debug_callback_fn(GLenum, GLenum, GLuint, GLenum, GLsizei, const GLchar*, const void*);
+
+    /* Key bindings */
+
 
     void _generate_texture_scene();
 
@@ -28,17 +36,7 @@ private:
 
     //            void __switch_to_dynamic_config()
 
-    /* Canvas vertex attribute info */
-    const std::vector<float> Canvas_VertexData = {
-        -1.0f, -1.0f,  0.0f, 0.0f,
-         1.0f, -1.0f,  1.0f, 0.0f,
-         1.0f, 1.0f,   1.0f, 1.0f,
-        -1.0f, 1.0f,   0.0f, 1.0f
-    };
 
-    const std::vector<unsigned int> Canvas_IndexData = {
-        0, 1, 2, 0, 2, 3
-    };
 
 public:
     GLib();

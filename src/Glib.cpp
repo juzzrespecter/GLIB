@@ -23,7 +23,7 @@ void GLib::_gl_debug_callback_fn( GLenum source,
     std::cerr << message << std::dec << std::endl;
 }
 
-GLib::GLib(): _win(nullptr), _scene(nullptr) {
+GLib::GLib(): _win(nullptr) {
     int status = glfwInit();
 
     glfwSetErrorCallback(_glfw_error_callback_fn);
@@ -35,7 +35,8 @@ GLib::GLib(): _win(nullptr), _scene(nullptr) {
 GLib::~GLib() {
     if (_win)
         glfwDestroyWindow(this->_win);
-    delete _scene;
+    if (_texture)
+        delete _texture;
     glfwTerminate();
 }
 
@@ -55,14 +56,11 @@ GLib::~GLib() {
 // la creacionb del buffer ya tienen en cuenta las coordenadas de textura
 // la textura es un attributo del vertex, se anyade una config para el VAO
 void GLib::_generate_texture_scene() {
-    _scene = new Canvas(Canvas_VertexData, sizeof(float) * Canvas_VertexData.size(),
-                        Canvas_IndexData, sizeof(unsigned int) * Canvas_IndexData.size());
-    _scene->Bind();
-    VertexBufferLayout buffer_layout;;
-    buffer_layout.Push<GLfloat>(4);
-    buffer_layout.Push<GLfloat>(2);
-    _scene_vao = new VAO();
-    _scene_vao->AddBuffer(_scene->GetVertexBuffer(), buffer_layout);
+    //VertexBufferLayout buffer_layout;;
+    //buffer_layout.Push<GLfloat>(3);
+    //buffer_layout.Push<GLfloat>(2);
+    //_scene_vao = new VAO();
+    //_scene_vao->AddBuffer(_scene->GetVertexBuffer(), buffer_layout);
     //GL_wrap(glEnableVertexAttribArray(0));
     //GL_wrap(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr));
 }

@@ -10,8 +10,8 @@ private:
     VertexBuffer() = delete;
 
 public:
-    VertexBuffer(const std::vector<float> &, unsigned int);
-    VertexBuffer(const std::vector<float> &, unsigned int, GLuint);
+    VertexBuffer(const std::vector<float> &);
+    VertexBuffer(const std::vector<float> &, GLuint);
     VertexBuffer(const VertexBuffer &);
 
     ~VertexBuffer();

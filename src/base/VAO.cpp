@@ -36,7 +36,7 @@ void VAO::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout) co
     for (unsigned int i = 0; i < elements.size(); i++) {
         auto& element = elements[i];
 
-        GL_wrap(glEnableVertexAttribArray(vao_id));
+        GL_wrap(glEnableVertexAttribArray(i));
         GL_wrap(glVertexAttribPointer(i, element.size, element.type, element.normalized,
             layout.GetStride(), reinterpret_cast<void *>(offset)));
         offset += element.size * VertexBufferElement::GetSize(element.type);
