@@ -13,10 +13,9 @@ private:
     unsigned int Window_Width;
 
     GLFWwindow *_win;
-    VAO        *_scene_vao;
     Texture    *_texture; // temporal para prueba
 
-    Canvas     _scene;
+    Canvas     *_scene;
 
     // array de clases que contengan elementos generados dinamicamente
 

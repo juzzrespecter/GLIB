@@ -56,6 +56,7 @@ GLib::~GLib() {
 // la creacionb del buffer ya tienen en cuenta las coordenadas de textura
 // la textura es un attributo del vertex, se anyade una config para el VAO
 void GLib::_generate_texture_scene() {
+    _scene = new Canvas();
     //VertexBufferLayout buffer_layout;;
     //buffer_layout.Push<GLfloat>(3);
     //buffer_layout.Push<GLfloat>(2);

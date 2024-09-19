@@ -7,7 +7,7 @@ VertexBuffer::VertexBuffer(const std::vector<float> &vb, GLuint mode): v_positio
     GL_wrap(glBindBuffer(GL_ARRAY_BUFFER, 0));
 }
 
-VertexBuffer::VertexBuffer(const std::vector<float> &vb): v_positions(vb) {
+VertexBuffer::VertexBuffer(const std::vector<float> &vb): buffer_id(0), v_positions(vb) {
     GL_wrap(glGenBuffers(1, &buffer_id));
     GL_wrap(glBindBuffer(GL_ARRAY_BUFFER, buffer_id));
     GL_wrap(glBufferData(GL_ARRAY_BUFFER,
