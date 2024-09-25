@@ -39,6 +39,9 @@ void VAO::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout) co
         GL_wrap(glEnableVertexAttribArray(i));
         GL_wrap(glVertexAttribPointer(i, element.size, element.type, element.normalized,
             layout.GetStride(), reinterpret_cast<void *>(offset)));
+        std::cout << "ENABLE: " << i << ", " << element.size << ", " << element.type;
+        std::cout << ", " << element.normalized << ", " << layout.GetStride();
+        std::cout << ", " << offset << std::endl;
         offset += element.size * VertexBufferElement::GetSize(element.type);
     }
 
