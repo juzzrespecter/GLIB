@@ -9,7 +9,7 @@ private:
 
     std::vector<unsigned int> indices;
 
-    IndexBuffer(void) = delete;
+    IndexBuffer() = delete;
 
 public:
     IndexBuffer(const std::vector<unsigned int> &, GLuint);

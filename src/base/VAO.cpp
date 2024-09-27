@@ -50,19 +50,19 @@ void VAO::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout) co
 template<>
   void VertexBufferLayout::Push<GLint>(GLint size) {
     elements.push_back({GL_INT, size, GL_FALSE});
-    stride += VertexBufferElement::GetSize(GL_INT);
+    stride += VertexBufferElement::GetSize(GL_INT) * size;
 }
 
 template<>
 void VertexBufferLayout::Push<GLuint>(GLint size) {
     elements.push_back({GL_UNSIGNED_INT, size, GL_FALSE});
-    stride +=  VertexBufferElement::GetSize(GL_UNSIGNED_INT);
+    stride +=  VertexBufferElement::GetSize(GL_UNSIGNED_INT) * size;
 }
 
 template<>
 void VertexBufferLayout::Push<GLfloat>(GLint size) {
     elements.push_back({GL_FLOAT, size, GL_FALSE});
-    stride += VertexBufferElement::GetSize(GL_FLOAT);
+    stride += VertexBufferElement::GetSize(GL_FLOAT) * size;
 }
 
 void VAO::Bind() const {

@@ -2,7 +2,7 @@
 
 void GLib::_render_main_loop()
 {
-    _texture->Bind();
+    // _texture->Bind();
     while (!glfwWindowShouldClose(_win))
     {
         GL_wrap(glClear(GL_COLOR_BUFFER_BIT));

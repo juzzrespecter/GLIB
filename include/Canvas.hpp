@@ -14,11 +14,6 @@
 class Canvas // wes un vertex buffer, o contiene un vertex buffer ??
 {
 private:
-    VertexBuffer  vbo;
-    IndexBuffer   ibo;
-    ShaderProgram sp;
-    VAO           vao;
-
     /* Canvas vertex attribute info */
     const std::vector<float> Canvas_VertexData = {
         -1.0f, -1.0f,  0.0f, 0.0f,
@@ -30,6 +25,11 @@ private:
     const std::vector<unsigned int> Canvas_IndexData = {
         0, 1, 2, 0, 2, 3
     };
+
+    VertexBuffer  vbo;
+    IndexBuffer   ibo;
+    ShaderProgram sp;
+    VAO           vao;
 
 public:
     Canvas();

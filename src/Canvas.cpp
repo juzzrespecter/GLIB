@@ -1,10 +1,11 @@
 #include <Canvas.hpp>
 
+//Canvas::Canvas(): vbo(Canvas_VertexData), ibo(Canvas_IndexData) {
 Canvas::Canvas(): vbo(Canvas_VertexData), ibo(Canvas_IndexData) {
     std::cout << "Generating canvas ...\n";
     VertexBufferLayout buffer_layout;;
 
-    buffer_layout.Push<GLfloat>(3);
+    buffer_layout.Push<GLfloat>(2);
     buffer_layout.Push<GLfloat>(2);
     vao.AddBuffer(GetVertexBuffer(), buffer_layout);
 }

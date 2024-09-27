@@ -5,6 +5,7 @@
 
 bool GL_check_error(const char *fn, const char *file, int line)
 {
+    std::cerr << "[GL] Called " << fn << std::endl;
     while (GLenum err = glGetError() != GL_NO_ERROR)
     {
         std::cerr << "[GL] [ERROR] " << err << std::endl;

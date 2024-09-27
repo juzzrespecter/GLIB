@@ -1,5 +1,5 @@
-#ifndef __VERTEX_BUFFER_HPP
-# define __VERTEX_BUFFER_HPP
+#ifndef VERTEX_BUFFER_HPP
+# define VERTEX_BUFFER_HPP
 # include <glib_internals.hpp>
 
 class VertexBuffer {
@@ -22,4 +22,4 @@ public:
     void Release() const;
 };
 
-#endif //__VERTEX_BUFFER_HPP
+#endif //VERTEX_BUFFER_HPP

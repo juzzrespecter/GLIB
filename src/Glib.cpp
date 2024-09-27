@@ -85,6 +85,7 @@ void GLib::create_context(unsigned int w, unsigned int h) {
     }
     // glViewport ??
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
+
     GL_wrap(glViewport(0, 0, w, h)); //temp
 
 #ifdef DEBUG
