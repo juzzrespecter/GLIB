@@ -2,6 +2,14 @@
 #include <Glib.hpp>
 #include <ShaderProgram.hpp>
 
+
+static void testing_path() {
+    int nrAttributes;
+
+    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+    std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
+}
+
 void GLib::_glfw_error_callback_fn(int error, const char *err_msg) {
     std::cerr << "[GLFW] [ERROR] GLFW failed with error code: " << error << std::endl;
     std::cerr << "[GLFW] [ERROR] " << err_msg << std::endl;
@@ -57,16 +65,18 @@ GLib::~GLib() {
 // la textura es un attributo del vertex, se anyade una config para el VAO
 void GLib::_generate_texture_scene() {
     _scene = new Canvas();
-    //VertexBufferLayout buffer_layout;;
-    //buffer_layout.Push<GLfloat>(3);
-    //buffer_layout.Push<GLfloat>(2);
-    //_scene_vao = new VAO();
-    //_scene_vao->AddBuffer(_scene->GetVertexBuffer(), buffer_layout);
-    //GL_wrap(glEnableVertexAttribArray(0));
-    //GL_wrap(glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), nullptr));
 }
 
 void GLib::create_context(unsigned int w, unsigned int h) {
+    // hints
+    //glfwWindowHint(int hint, int value);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#ifdef DEBUG
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+#endif
+
     _win = glfwCreateWindow(w, h, "Test title", nullptr, nullptr);
 
     if (!_win) {
@@ -74,11 +84,6 @@ void GLib::create_context(unsigned int w, unsigned int h) {
     }
     glfwMakeContextCurrent(_win);
 
-    // hints
-    //glfwWindowHint(int hint, int value);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
         std::cerr << "[GLAD] [ERROR] could not initializate OpenGL" << std::endl; // temporal
         throw glib_runtime_exception("GLAD initialization error");
@@ -86,13 +91,15 @@ void GLib::create_context(unsigned int w, unsigned int h) {
     // glViewport ??
     std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
 
-    GL_wrap(glViewport(0, 0, w, h)); //temp
+    glViewport(0, 0, w, h); //temp
 
 #ifdef DEBUG
+    std::cerr << "[GL] [DEBUG] Debug enabled." << std::endl;
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(_gl_debug_callback_fn, 0);
 #endif
 
+    testing_path();
     _generate_texture_scene();
 }
 
@@ -111,3 +118,5 @@ void GLib::add_texture(int w, int h, const std::vector<unsigned char> &data) {
 void GLib::render() {
     _render_main_loop();
 }
+
+

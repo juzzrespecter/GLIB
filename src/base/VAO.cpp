@@ -66,7 +66,7 @@ void VertexBufferLayout::Push<GLfloat>(GLint size) {
 }
 
 void VAO::Bind() const {
-    GL_wrap(glBindVertexArray(vao_id));
+    glBindVertexArray(vao_id);
 }
 
 void VAO::Release() const {

@@ -12,7 +12,7 @@ class glib_runtime_exception: public std::runtime_error
         glib_runtime_exception();
 
     public:
-        glib_runtime_exception(const std::string);
+        glib_runtime_exception(const std::string&);
 
 };
 

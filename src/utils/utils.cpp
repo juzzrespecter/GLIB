@@ -5,7 +5,6 @@
 
 bool GL_check_error(const char *fn, const char *file, int line)
 {
-    std::cerr << "[GL] Called " << fn << std::endl;
     while (GLenum err = glGetError() != GL_NO_ERROR)
     {
         std::cerr << "[GL] [ERROR] " << err << std::endl;
@@ -15,15 +14,15 @@ bool GL_check_error(const char *fn, const char *file, int line)
     return true;
 }
 
-void GL_clear_error(void)
+void GL_clear_error()
 {
     while (glGetError() != GL_NO_ERROR);
 }
 
 // exception classes
 
-glib_runtime_exception::glib_runtime_exception(void)
+glib_runtime_exception::glib_runtime_exception()
     : std::runtime_error("") { }
 
-glib_runtime_exception::glib_runtime_exception(const std::string what)
+glib_runtime_exception::glib_runtime_exception(const std::string &what)
     : std::runtime_error(what) { }

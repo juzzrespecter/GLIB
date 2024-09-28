@@ -83,14 +83,14 @@ ShaderProgram::~ShaderProgram()
 }
 
 
-GLuint  ShaderProgram::GetId(void) const
+GLuint  ShaderProgram::GetId() const
 {   
     return (program_id);
 }
 
-void    ShaderProgram::Bind(void) const
+void    ShaderProgram::Bind() const
 {
-    glUseProgram(program_id);
+    GL_wrap(glUseProgram(program_id));
 }
 
 void    ShaderProgram::Release(void) const
