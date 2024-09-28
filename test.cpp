@@ -30,6 +30,7 @@ std::vector<unsigned char> generate_espana(int w, int h)
             buffer.push_back(0x0);
            }
        }
+    std::cout << buffer.size() << ", " << h * w * 3 << std::endl;
     return buffer;
 }
 

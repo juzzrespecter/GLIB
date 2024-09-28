@@ -15,7 +15,7 @@ Shader::Shader(GLuint type, const std::string& shader_path): type(type)
     buffer << shader_file;
     src = buffer.str();
 
-    GL_wrap(shader_id = glCreateShader(type));
-    GL_wrap(glShaderSource(&shader_id, src));
-    GL_wrap(glCompileShader(shader_id));
+    shader_id = glCreateShader(type);
+    glShaderSource(&shader_id, src);
+    glCompileShader(shader_id);
 }

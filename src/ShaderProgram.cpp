@@ -9,9 +9,9 @@ GLuint    ShaderProgram::_compile_shader(const std::string& src, GLenum type)
     GLuint  shader_id;
     const char *_src = src.c_str();
 
-    GL_wrap(shader_id = glCreateShader(type));
-    GL_wrap(glShaderSource(shader_id, 1, &_src, nullptr));
-    GL_wrap(glCompileShader(shader_id));
+    shader_id = glCreateShader(type);
+    glShaderSource(shader_id, 1, &_src, nullptr);
+    glCompileShader(shader_id);
 
     int compile_res;
     glGetShaderiv(shader_id, GL_COMPILE_STATUS, &compile_res);
@@ -50,17 +50,17 @@ ShaderProgram::ShaderProgram()
     : vertex_path("./src/shaders/canvas_vertex.glsl"),
       fragment_path("./src/shaders/canvas_fragment.glsl")
 {
-    GL_wrap(program_id = glCreateProgram());
+    program_id = glCreateProgram();
     vertex_src = _read_shader_from_file(vertex_path);
     fragment_src = _read_shader_from_file(fragment_path);
 
     vertex_id = _compile_shader(vertex_src, GL_VERTEX_SHADER);
     fragment_id = _compile_shader(fragment_src, GL_FRAGMENT_SHADER);
 
-    GL_wrap(glAttachShader(program_id, vertex_id));
-    GL_wrap(glAttachShader(program_id, fragment_id));
-    GL_wrap(glLinkProgram(program_id));
-    GL_wrap(glValidateProgram(program_id));
+    glAttachShader(program_id, vertex_id);
+    glAttachShader(program_id, fragment_id);
+    glLinkProgram(program_id);
+    glValidateProgram(program_id);
 }
 
 ShaderProgram::ShaderProgram(const std::string& vpath, const std::string& fpath)
@@ -90,7 +90,7 @@ GLuint  ShaderProgram::GetId() const
 
 void    ShaderProgram::Bind() const
 {
-    GL_wrap(glUseProgram(program_id));
+    glUseProgram(program_id);
 }
 
 void    ShaderProgram::Release(void) const

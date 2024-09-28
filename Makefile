@@ -33,7 +33,7 @@ TEST	= test
 CXX =	    g++
 CXXFLAGS = -Wall -Werror -Wextra
 ifdef DEBUG
-	CXXFLAGS += -DDEBUG -g3 #-fsanitize=address -g3
+	CXXFLAGS += -DDEBUG -g3 -fsanitize=address -g3
 endif
 
 CPPFLAGS = -MMD

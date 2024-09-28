@@ -17,8 +17,8 @@ const VertexBufferLayout::GL_vector_element &VertexBufferLayout::GetElements() c
 }
 
 VAO::VAO(): vao_id(0) {
-    GL_wrap(glGenVertexArrays(1, &vao_id));
-    GL_wrap(glBindVertexArray(vao_id));
+    glGenVertexArrays(1, &vao_id);
+    glBindVertexArray(vao_id);
 }
 
 VAO::~VAO() {
@@ -36,14 +36,15 @@ void VAO::AddBuffer(const VertexBuffer& vb, const VertexBufferLayout& layout) co
     for (unsigned int i = 0; i < elements.size(); i++) {
         auto& element = elements[i];
 
-        GL_wrap(glEnableVertexAttribArray(i));
-        GL_wrap(glVertexAttribPointer(i, element.size, element.type, element.normalized,
-            layout.GetStride(), reinterpret_cast<void *>(offset)));
+        glEnableVertexAttribArray(i);
+        glVertexAttribPointer(i, element.size, element.type, element.normalized,
+            layout.GetStride(), reinterpret_cast<void *>(offset));
         std::cout << "ENABLE: " << i << ", " << element.size << ", " << element.type;
         std::cout << ", " << element.normalized << ", " << layout.GetStride();
         std::cout << ", " << offset << std::endl;
         offset += element.size * VertexBufferElement::GetSize(element.type);
     }
+    // to improve
 
 }
 
@@ -70,7 +71,7 @@ void VAO::Bind() const {
 }
 
 void VAO::Release() const {
-    GL_wrap(glBindVertexArray(0));
+    glBindVertexArray(0);
 }
 
 GLuint VAO::GetId() const {
