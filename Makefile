@@ -30,7 +30,7 @@ TEST	= test
 
 # ======= Compilation flags =======
 
-CXX =	    g++
+CXX =	    clang++
 CXXFLAGS = -Wall -Werror -Wextra
 ifdef DEBUG
 	CXXFLAGS += -DDEBUG -g3 -fsanitize=address -g3
@@ -72,3 +72,5 @@ fclean:		clean
 re: fclean all
 
 -include $(DEPS)
+
+.PHONY: all clean fclean re
